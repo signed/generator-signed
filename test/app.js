@@ -15,4 +15,10 @@ describe('generator-signed:app', function () {
       'example-project/pom.xml'
     ]);
   });
+
+  it('creates a .editorconfig', function () {
+    assert.file([
+      'example-project/.editorconfig'
+    ]);
+  });
 });

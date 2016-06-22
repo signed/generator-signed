@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
+
   prompting: function () {
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -26,11 +27,17 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
   },
 
-  configuring:{
-    git: function(){
+  configuring: {
+    git: function () {
       this.fs.copy(
         this.templatePath('.gitignore'),
-        this.destinationPath(this.props.projectName+'/'+'.gitignore')
+        this._destinationProjectRoot('.gitignore')
+      );
+    },
+    editorconfig: function () {
+      this.fs.copy(
+        this.templatePath('.editorconfig'),
+        this._destinationProjectRoot('.editorconfig')
       );
     }
   },
@@ -39,11 +46,15 @@ module.exports = yeoman.Base.extend({
     maven: function () {
       this.fs.copyTpl(
         this.templatePath('pom.xml'),
-        this.destinationPath(this.props.projectName + '/'+'pom.xml'), {
-          artifactId: this.props.projectName
-          , groupId: this.props.package
+        this._destinationProjectRoot('pom.xml'), {
+          artifactId: this.props.projectName,
+          groupId: this.props.package
         }
       );
     }
+  },
+
+  _destinationProjectRoot: function (path) {
+    return this.props.projectName + '/' + path;
   }
 });
