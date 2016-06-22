@@ -6,13 +6,13 @@ var helpers = require('yeoman-test');
 describe('generator-signed:app', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true})
+      .withPrompts({projectName: 'example-project'})
       .toPromise();
   });
 
-  it('creates files', function () {
+  it('creates a maven project model in a subfolder', function () {
     assert.file([
-      'dummyfile.txt'
+      'example-project/pom.xml'
     ]);
   });
 });

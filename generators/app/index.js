@@ -11,10 +11,9 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
+      type: 'input',
+      name: 'projectName',
+      message: 'What is your projects name?'
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -23,14 +22,14 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
   },
 
-  writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  },
-
-  install: function () {
-    this.installDependencies();
+  writing: {
+    maven: function () {
+      this.fs.copyTpl(
+        this.templatePath('pom.xml'),
+        this.destinationPath(this.props.projectName + '/pom.xml'), {
+          artifactId: this.props.projectName
+        }
+      );
+    }
   }
 });
