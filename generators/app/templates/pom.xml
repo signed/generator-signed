@@ -9,6 +9,7 @@
     <relativePath></relativePath>
   </parent>
 
+  <groupId><%-groupId%></groupId>
   <artifactId><%-artifactId%></artifactId>
 
   <properties>

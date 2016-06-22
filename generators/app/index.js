@@ -14,10 +14,14 @@ module.exports = yeoman.Base.extend({
       type: 'input',
       name: 'projectName',
       message: 'What is your projects name?'
+    }, {
+      type: 'input',
+      name: 'package',
+      message: 'What is your projects package?',
+      default: 'org.example'
     }];
 
     return this.prompt(prompts).then(function (props) {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     }.bind(this));
   },
@@ -28,6 +32,7 @@ module.exports = yeoman.Base.extend({
         this.templatePath('pom.xml'),
         this.destinationPath(this.props.projectName + '/pom.xml'), {
           artifactId: this.props.projectName
+          , groupId: this.props.package
         }
       );
     }
