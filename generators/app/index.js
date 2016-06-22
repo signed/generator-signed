@@ -27,10 +27,16 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: {
+    git: function(){
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath(this.props.projectName+'/'+'.gitignore')
+      );
+    },
     maven: function () {
       this.fs.copyTpl(
         this.templatePath('pom.xml'),
-        this.destinationPath(this.props.projectName + '/pom.xml'), {
+        this.destinationPath(this.props.projectName + '/'+'pom.xml'), {
           artifactId: this.props.projectName
           , groupId: this.props.package
         }
