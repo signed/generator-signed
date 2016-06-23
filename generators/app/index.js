@@ -52,11 +52,11 @@ module.exports = yeoman.Base.extend({
         }
       );
     },
-    
+
     bootMainClass: function () {
       this.fs.copyTpl(
         this.templatePath('src/main/java/package/BootApplication.java'),
-        this.destinationPath(this.props.projectName + '/src/main/java/' + this.props.package.split('.').join('/') + '/BootApplication.java'), {
+        this._destinationProjectRoot('src/main/java/' + this.props.package.split('.').join('/') + '/BootApplication.java'), {
           package: this.props.package
         }
       );
