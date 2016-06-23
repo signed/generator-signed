@@ -5,6 +5,10 @@ var yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
 
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+  },
+
   prompting: function () {
     // Have Yeoman greet the user.
     this.log(yosay(
