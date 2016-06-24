@@ -2,11 +2,14 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var ProjectStructure = require('../project-structure');
 
 module.exports = yeoman.Base.extend({
 
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
+    this.projectStructure = new ProjectStructure(this);
+    this.projectStructure.log();
   },
 
   prompting: function () {
