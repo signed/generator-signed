@@ -7,7 +7,7 @@ var ProjectStructure = require('../project-structure');
 module.exports = yeoman.Base.extend({
 
   constructor: function () {
-    yeoman.generators.Base.apply(this, arguments);
+    yeoman.Base.apply(this, arguments);
     this.projectStructure = new ProjectStructure(this);
     this.projectStructure.log();
   },
