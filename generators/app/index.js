@@ -38,13 +38,13 @@ module.exports = yeoman.Base.extend({
     git: function () {
       this.fs.copy(
         this.templatePath('.gitignore'),
-        this._destinationProjectRoot('.gitignore')
+        this.props.projectName + '/' + '.gitignore'
       );
     },
     editorconfig: function () {
       this.fs.copy(
         this.templatePath('.editorconfig'),
-        this._destinationProjectRoot('.editorconfig')
+        this.props.projectName + '/' + '.editorconfig'
       );
     }
   },
@@ -53,7 +53,7 @@ module.exports = yeoman.Base.extend({
     maven: function () {
       this.fs.copyTpl(
         this.templatePath('pom.xml'),
-        this._destinationProjectRoot('pom.xml'), {
+        this.props.projectName + '/' + 'pom.xml', {
           artifactId: this.props.projectName,
           groupId: this.props.package
         }
@@ -63,7 +63,7 @@ module.exports = yeoman.Base.extend({
     bootMainClass: function () {
       this.fs.copyTpl(
         this.templatePath('src/main/java/package/BootApplication.java'),
-        this._destinationProjectRoot('src/main/java/' + this.props.package.split('.').join('/') + '/BootApplication.java'), {
+        this.props.projectName + '/' + 'src/main/java/' + this.props.package.split('.').join('/') + '/BootApplication.java', {
           package: this.props.package
         }
       );
@@ -72,12 +72,7 @@ module.exports = yeoman.Base.extend({
     logbackConfiguration: function () {
       this.fs.copyTpl(
         this.templatePath('src/main/resources/logback.xml'),
-        this._destinationProjectRoot('src/main/resources/logback.xml')
+        this.props.projectName + '/' + 'src/main/resources/logback.xml'
       );
     }
-  },
-
-  _destinationProjectRoot: function (path) {
-    return this.props.projectName + '/' + path;
-  }
-});
+  }});
