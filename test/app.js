@@ -30,4 +30,10 @@ describe('generator-signed:app', function () {
       'example-project/src/main/java/example/BootApplication.java'
     ]);
   });
+
+  it('create a basic logback configuration', function () {
+    assert.file([
+      'example-project/src/main/resources/logback.xml'
+    ]);
+  });
 });

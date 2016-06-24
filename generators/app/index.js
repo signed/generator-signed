@@ -67,6 +67,13 @@ module.exports = yeoman.Base.extend({
           package: this.props.package
         }
       );
+    },
+
+    logbackConfiguration: function () {
+      this.fs.copyTpl(
+        this.templatePath('src/main/resources/logback.xml'),
+        this._destinationProjectRoot('src/main/resources/logback.xml')
+      );
     }
   },
 
