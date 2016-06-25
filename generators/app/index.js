@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var glob = require('glob');
 var ProjectStructure = require('../project-structure');
 
 module.exports = yeoman.Base.extend({
@@ -49,18 +50,9 @@ module.exports = yeoman.Base.extend({
     maven: function () {
       this.fs.copyTpl(
         this.templatePath('pom.xml'),
-        this.props.projectName + '/' + 'pom.xml', {
+        this.props.projectName + '/pom.xml', {
           artifactId: this.props.projectName,
           groupId: this.props.package
-        }
-      );
-    },
-
-    bootMainClass: function () {
-      this.fs.copyTpl(
-        this.templatePath('src/main/java/package/BootApplication.java'),
-        this.props.projectName + '/' + 'src/main/java/' + this.props.package.split('.').join('/') + '/BootApplication.java', {
-          package: this.props.package
         }
       );
     },
@@ -68,8 +60,24 @@ module.exports = yeoman.Base.extend({
     logbackConfiguration: function () {
       this.fs.copyTpl(
         this.templatePath('src/main/resources/logback.xml'),
-        this.props.projectName + '/' + 'src/main/resources/logback.xml'
+        this.props.projectName + '/src/main/resources/logback.xml'
       );
+    },
+
+    javaSourceFiles: function () {
+      var prefix = new RegExp('^' + this.templatePath() + '/');
+      var files = glob.sync(this.templatePath('**/*.java')).map(function (path) {
+        return path.replace(prefix, '');
+      });
+      files.forEach(function (templatePath) {
+        var destinationPath = templatePath.replace('package', this.props.package.split('.').join('/'));
+        this.fs.copyTpl(
+          this.templatePath(templatePath),
+          this.destinationPath(this.props.projectName + '/' + destinationPath), {
+            package: this.props.package
+          }
+        );
+      }, this);
     }
   }
 });

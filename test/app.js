@@ -24,7 +24,7 @@ describe('generator-signed:app', function () {
       'example-project/.editorconfig'
     ]);
   });
-  
+
   it('creates a .gitignore', function () {
     assert.file([
       'example-project/.gitignore'
