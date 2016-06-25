@@ -5,10 +5,6 @@
 
 First, install [Yeoman](http://yeoman.io) and generator-signed using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
-```bash
-npm install -g yo
-npm install -g generator-signed
-```
 
 Then generate your new project:
 
@@ -22,10 +18,6 @@ yo signed
  * Yeoman is a person with feelings and opinions, but is very easy to work with.
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
-
-## License
-
-Apache-2.0 © [Thomas Heilbronner](https://github.com/signed)
 
 
 [npm-image]: https://badge.fury.io/js/generator-signed.svg
