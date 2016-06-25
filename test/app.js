@@ -24,6 +24,12 @@ describe('generator-signed:app', function () {
       'example-project/.editorconfig'
     ]);
   });
+  
+  it('creates a .gitignore', function () {
+    assert.file([
+      'example-project/.gitignore'
+    ]);
+  });
 
   it('creates spring boot main class in package', function () {
     assert.file([

@@ -35,17 +35,12 @@ module.exports = yeoman.Base.extend({
   },
 
   configuring: {
-    git: function () {
-      this.fs.copy(
-        this.templatePath('.gitignore'),
-        this.props.projectName + '/' + '.gitignore'
-      );
-    },
-    editorconfig: function () {
-      this.fs.copy(
-        this.templatePath('.editorconfig'),
-        this.props.projectName + '/' + '.editorconfig'
-      );
+    filesInProjectRoot: function () {
+      this.fs.copy(this.templatePath('*'), this.props.projectName, {
+        globOptions: {
+          dot: true
+        }
+      });
     }
   },
 
@@ -75,4 +70,5 @@ module.exports = yeoman.Base.extend({
         this.props.projectName + '/' + 'src/main/resources/logback.xml'
       );
     }
-  }});
+  }
+});
