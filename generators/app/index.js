@@ -56,7 +56,6 @@ module.exports = yeoman.Base.extend({
       );
     },
 
-
     bootMainClass: function () {
       this.fs.copyTpl(
         this.templatePath('src/main/java/package/BootApplication.java'),
