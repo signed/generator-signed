@@ -38,7 +38,8 @@ module.exports = yeoman.Base.extend({
     filesInProjectRoot: function () {
       this.fs.copy(this.templatePath('*'), this.props.projectName, {
         globOptions: {
-          dot: true
+          dot: true,
+          ignore: ['**/pom.xml']
         }
       });
     }
@@ -54,6 +55,7 @@ module.exports = yeoman.Base.extend({
         }
       );
     },
+
 
     bootMainClass: function () {
       this.fs.copyTpl(
