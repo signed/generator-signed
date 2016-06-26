@@ -1,5 +1,5 @@
 # generator-signed [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> This is a first sandbox to play with yo
+> This is a first sandbox to play with, nothing somebody should depend on
 
 ## Installation
 
