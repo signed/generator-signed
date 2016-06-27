@@ -54,20 +54,14 @@ module.exports = yeoman.Base.extend({
     },
 
     maven: function () {
-      this.fs.copyTpl(
-        this.templatePath('pom.xml'),
-        this.props.projectName + '/pom.xml', {
-          artifactId: this.props.projectName,
-          groupId: this.props.package
-        }
-      );
+      this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml', {
+        artifactId: this.props.projectName,
+        groupId: this.props.package
+      });
     },
 
     logbackConfiguration: function () {
-      this.fs.copyTpl(
-        this.templatePath('src/main/resources/logback.xml'),
-        this.props.projectName + '/src/main/resources/logback.xml'
-      );
+      this.projectStructure.scaffoldInProjectRoot('src/main/resources/logback.xml');
     },
 
     javaSourceFiles: function () {
