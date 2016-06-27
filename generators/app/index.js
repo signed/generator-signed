@@ -22,7 +22,8 @@ module.exports = yeoman.Base.extend({
     var prompts = [{
       type: 'input',
       name: 'projectName',
-      message: 'What is your projects name?'
+      message: 'What is your projects name?',
+      default: 'ping'
     }, {
       type: 'input',
       name: 'package',
@@ -47,6 +48,11 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: {
+
+    copyAdditionalBuildConfigurationFiles: function () {
+      this.fs.copy(this.templatePath('etc/'), this.props.projectName + '/etc');
+    },
+
     maven: function () {
       this.fs.copyTpl(
         this.templatePath('pom.xml'),

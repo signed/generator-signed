@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class BootApplication {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         new SpringApplicationBuilder()
                 .sources(BootApplication.class)
                 .run(args);

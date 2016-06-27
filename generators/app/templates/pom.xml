@@ -90,6 +90,7 @@
                     <targetJdk>${java.version}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>
                     <skipPmdError>${pmd.skip.errors}</skipPmdError>
+                    <linkXRef>false</linkXRef>
                     <rulesets>
                         <ruleset>${pmd.ruleset}</ruleset>
                     </rulesets>
