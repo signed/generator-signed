@@ -3,6 +3,10 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
+var projectDirectory = function (path) {
+  return 'example-project/' + path;
+};
+
 describe('generator-signed:app', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/app'))
@@ -15,31 +19,31 @@ describe('generator-signed:app', function () {
 
   it('creates a maven project model in a subfolder', function () {
     assert.file([
-      'example-project/pom.xml'
+      projectDirectory('pom.xml')
     ]);
   });
 
   it('creates a .editorconfig', function () {
     assert.file([
-      'example-project/.editorconfig'
+      projectDirectory('.editorconfig')
     ]);
   });
 
   it('creates a .gitignore', function () {
     assert.file([
-      'example-project/.gitignore'
+      projectDirectory('.gitignore')
     ]);
   });
 
   it('creates spring boot main class in package', function () {
     assert.file([
-      'example-project/src/main/java/example/BootApplication.java'
+      projectDirectory('src/main/java/example/BootApplication.java')
     ]);
   });
 
   it('create a basic logback configuration', function () {
     assert.file([
-      'example-project/src/main/resources/logback.xml'
+      projectDirectory('src/main/resources/logback.xml')
     ]);
   });
 });
