@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 
 module.exports = ProjectStructure;
 
@@ -30,11 +31,22 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
 };
 
 ProjectStructure.prototype.scaffoldJavaFile = function (javaFile) {
-  var destinationPath = javaFile.replace('package', this.generator.props.package.split('.').join('/'));
+  var segments = javaFile.split(path.sep);
+  var packageIndex = segments.indexOf('package');
+
+  segments.pop();
+  segments.splice(0, packageIndex + 1);
+
+  var basePackageSegments = this.generator.props.package.split('.');
+  var packageSegments = basePackageSegments.concat(segments);
+
+  var destinationPath = javaFile.replace('package', basePackageSegments.join('/'));
+  var packageForFile = packageSegments.join('.');
+
   this.generator.fs.copyTpl(
     this.generator.templatePath(javaFile),
     this._projectRoot(destinationPath), {
-      package: this.generator.props.package
+      package: packageForFile
     }
   );
 };
