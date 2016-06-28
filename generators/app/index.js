@@ -50,7 +50,7 @@ module.exports = yeoman.Base.extend({
   writing: {
 
     copyAdditionalBuildConfigurationFiles: function () {
-      this.fs.copy(this.templatePath('etc/'), this.props.projectName + '/etc');
+      this.projectStructure.scaffoldInProjectRoot('etc/');
     },
 
     maven: function () {
