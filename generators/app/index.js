@@ -49,7 +49,7 @@ module.exports = yeoman.Base.extend({
 
   writing: {
 
-    copyAdditionalBuildConfigurationFiles: function () {
+    additionalBuildConfigurationFiles: function () {
       this.projectStructure.scaffoldInProjectRoot('etc/');
     },
 
