@@ -38,7 +38,7 @@ module.exports = yeoman.Base.extend({
 
   configuring: {
     filesInProjectRoot: function () {
-      this.fs.copy(this.templatePath('*'), this.props.projectName, {
+      this.projectStructure.scaffoldGlobIn('*', '', {
         globOptions: {
           dot: true,
           ignore: ['**/pom.xml']

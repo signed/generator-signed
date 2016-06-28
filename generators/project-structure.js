@@ -17,6 +17,13 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   );
 };
 
+ProjectStructure.prototype.scaffoldGlobIn = function (glob, destination, options) {
+  this.generator.fs.copy(
+    this.generator.templatePath(glob),
+    this.generator.props.projectName + '/' + destination,
+    options);
+};
+
 ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templateVariables) {
   this.generator.fs.copyTpl(
     this.generator.templatePath(path),
