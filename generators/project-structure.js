@@ -6,10 +6,6 @@ function ProjectStructure(generator) {
   this.generator = generator;
 }
 
-ProjectStructure.prototype.log = function () {
-  this.generator.log('greetings from the project structure');
-};
-
 ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   this.generator.fs.copy(
     this.generator.templatePath(path),

@@ -10,7 +10,6 @@ module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.projectStructure = new ProjectStructure(this);
-    this.projectStructure.log();
   },
 
   prompting: function () {
