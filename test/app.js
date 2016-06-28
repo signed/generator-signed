@@ -4,7 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 var projectDirectory = function (path) {
-  return 'example-project/' + path;
+  return path;
 };
 
 describe('generator-signed:app', function () {

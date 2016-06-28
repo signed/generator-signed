@@ -40,5 +40,5 @@ ProjectStructure.prototype.scaffoldJavaFile = function (javaFile) {
 };
 
 ProjectStructure.prototype._projectRoot = function (path) {
-  return this.generator.destinationPath(this.generator.props.projectName + '/' + path);
+  return this.generator.destinationPath(path);
 };
