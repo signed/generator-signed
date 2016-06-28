@@ -69,14 +69,8 @@ module.exports = yeoman.Base.extend({
       var files = glob.sync(this.templatePath('**/*.java')).map(function (path) {
         return path.replace(prefix, '');
       });
-      files.forEach(function (templatePath) {
-        var destinationPath = templatePath.replace('package', this.props.package.split('.').join('/'));
-        this.fs.copyTpl(
-          this.templatePath(templatePath),
-          this.destinationPath(this.props.projectName + '/' + destinationPath), {
-            package: this.props.package
-          }
-        );
+      files.forEach(function (javaFileInTemplateDirectory) {
+        this.projectStructure.scaffoldJavaFile(javaFileInTemplateDirectory);
       }, this);
     }
   }
