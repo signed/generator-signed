@@ -37,7 +37,7 @@ ProjectStructure.prototype.scaffoldJavaFile = function (javaFile) {
   segments.pop();
   segments.splice(0, packageIndex + 1);
 
-  var basePackageSegments = this.generator.props.package.split('.');
+  var basePackageSegments = this.generator.configuration.package().split('.');
   var packageSegments = basePackageSegments.concat(segments);
 
   var destinationPath = javaFile.replace('package', basePackageSegments.join('/'));

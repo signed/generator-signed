@@ -4,12 +4,14 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var glob = require('glob');
 var ProjectStructure = require('../project-structure');
+var Configuration = require('../configuration');
 
 module.exports = yeoman.Base.extend({
 
   constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.projectStructure = new ProjectStructure(this);
+    this.configuration = new Configuration(this);
   },
 
   prompting: function () {
@@ -18,24 +20,16 @@ module.exports = yeoman.Base.extend({
       'Welcome to the finest ' + chalk.red('generator-signed') + ' generator!'
     ));
 
-    var prompts = [{
-      type: 'input',
-      name: 'projectName',
-      message: 'What is your projects name?',
-      default: 'ping'
-    }, {
-      type: 'input',
-      name: 'package',
-      message: 'What is your projects package?',
-      default: 'org.example'
-    }];
-
-    return this.prompt(prompts).then(function (props) {
-      this.props = props;
+    return this.prompt(this.configuration.prompts()).then(function (answers) {
+      this.configuration.answers2(answers);
     }.bind(this));
   },
 
   configuring: {
+    storeAnswers: function () {
+      this.configuration.storeAnswers();
+    },
+
     filesInProjectRoot: function () {
       this.projectStructure.scaffoldGlobIn('*', '', {
         globOptions: {
@@ -54,8 +48,8 @@ module.exports = yeoman.Base.extend({
 
     maven: function () {
       this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml', {
-        artifactId: this.props.projectName,
-        groupId: this.props.package
+        artifactId: this.configuration.projectName(),
+        groupId: this.configuration.package()
       });
     },
 
