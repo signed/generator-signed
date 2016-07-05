@@ -53,8 +53,8 @@ module.exports = yeoman.Base.extend({
       });
     },
 
-    logbackConfiguration: function () {
-      this.projectStructure.scaffoldInProjectRoot('src/main/resources/logback.xml');
+    mavenResources: function () {
+      this.projectStructure.scaffoldGlobIn('src/main/resources/**', 'src/main/resources/');
     },
 
     javaSourceFiles: function () {
