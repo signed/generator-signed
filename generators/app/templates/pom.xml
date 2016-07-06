@@ -19,7 +19,7 @@
         <findbugs.skip>false</findbugs.skip>
         <pmd.maven.version>3.6</pmd.maven.version>
         <pmd.ruleset>${project.basedir}/etc/pmd/ruleset.xml</pmd.ruleset>
-        <pmd.exludeFile>${project.basedir}/etc/pmd/excluded-violations.properties</pmd.exludeFile>
+        <pmd.excludeFile>${project.basedir}/etc/pmd/excluded-violations.properties</pmd.excludeFile>
         <pmd.skip.errors>false</pmd.skip.errors>
         <pmd.skip>false</pmd.skip>
     </properties>
