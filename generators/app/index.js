@@ -48,13 +48,15 @@ module.exports = yeoman.Base.extend({
 
     maven: function () {
       this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml', {
-        artifactId: this.configuration.projectName(),
+        artifactId: this.configuration.artifactName(),
         groupId: this.configuration.package()
       });
     },
 
     mavenResources: function () {
-      this.projectStructure.scaffoldGlobIn('src/main/resources/**', 'src/main/resources/');
+      this.projectStructure.scaffoldGlobWithTemplateIn('src/main/resources/**', 'src/main/resources/', {
+        projectName: this.configuration.projectName()
+      });
     },
 
     javaSourceFiles: function () {

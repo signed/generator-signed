@@ -4,7 +4,6 @@ module.exports = Configuration;
 
 function Configuration(generator) {
   this.generator = generator;
-  this.stored = generator.config;
   this.answers = {};
   this.allOptions = {
     projectName: {
@@ -12,6 +11,14 @@ function Configuration(generator) {
         type: 'input',
         name: 'projectName',
         message: 'What is your projects name?',
+        default: 'Pong: The Game'
+      }
+    },
+    artifactName: {
+      prompt: {
+        type: 'input',
+        name: 'projectName',
+        message: 'How should the artifact be named',
         default: 'ping'
       }
     },
@@ -51,6 +58,10 @@ Configuration.prototype.storeAnswers = function () {
 
 Configuration.prototype.projectName = function () {
   return this.generator.config.get('projectName');
+};
+
+Configuration.prototype.artifactName = function () {
+  return this.generator.config.get('artifactName');
 };
 
 Configuration.prototype.package = function () {
