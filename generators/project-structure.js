@@ -30,11 +30,7 @@ ProjectStructure.prototype.scaffoldGlobWithTemplateIn = function (glob, destinat
 };
 
 ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templateVariables) {
-  this.generator.fs.copyTpl(
-    this.generator.templatePath(path),
-    this._projectRoot(path),
-    templateVariables
-  );
+  this.smartScaffold(path, path, templateVariables);
 };
 
 ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
