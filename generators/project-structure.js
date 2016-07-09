@@ -1,5 +1,6 @@
 'use strict';
 var path = require('path');
+var glob = require('glob');
 
 module.exports = ProjectStructure;
 
@@ -24,12 +25,12 @@ ProjectStructure.prototype.scaffoldGlobIn = function (glob, destination, options
   );
 };
 
-ProjectStructure.prototype.scaffoldGlobWithTemplateIn = function (glob, destination, templateVariables) {
-  this.generator.fs.copyTpl(
-    this.generator.templatePath(glob),
-    this._projectRoot(destination),
-    templateVariables
-  );
+ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source, templateVariables) {
+  var files = glob.sync(this.generator.templatePath(source));
+  files.forEach(function (file) {
+    var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
+    this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath, templateVariables);
+  }, this);
 };
 
 ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
