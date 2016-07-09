@@ -52,7 +52,6 @@ describe('generator-signed:app', function () {
     assert.file(projectDirectory('etc/'));
   });
 
-
   it('put projectName into swagger file', function () {
     assert.fileContent(
       projectDirectory('src/main/resources/static/index.html'), '<title>Example Project Rest API</title>'
