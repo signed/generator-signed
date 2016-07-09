@@ -9,10 +9,7 @@ function ProjectStructure(generator) {
 }
 
 ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
-  this.generator.fs.copy(
-    this.generator.templatePath(path),
-    this._projectRoot(path)
-  );
+  this.smartScaffold(path, path);
 };
 
 ProjectStructure.prototype.scaffoldGlobIn = function (glob, destination, options) {
