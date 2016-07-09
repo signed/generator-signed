@@ -1,6 +1,6 @@
 'use strict';
 var path = require('path');
-var glob = require('glob');
+const globby = require('globby');
 
 module.exports = ProjectStructure;
 
@@ -17,16 +17,18 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
   this.smartScaffold(path, path, templateVariables);
 };
 
-ProjectStructure.prototype.scaffoldGlobIn = function (glob, destination, options) {
-  this.generator.fs.copy(
-    this.generator.templatePath(glob),
-    this._projectRoot(destination),
-    options
-  );
+ProjectStructure.prototype.scaffoldGlobIn = function (source, destination, options) {
+  const globOptions = options.globOptions || {};
+  var blub = this.generator.templatePath(source);
+  var files = globby.sync(blub, globOptions);
+  files.forEach(function (file) {
+    var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
+    this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath);
+  }, this);
 };
 
 ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source, templateVariables) {
-  var files = glob.sync(this.generator.templatePath(source));
+  var files = globby.sync(this.generator.templatePath(source));
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
     this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath, templateVariables);
