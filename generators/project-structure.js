@@ -42,7 +42,6 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
 
 ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
   var templateDirectoryRelativePath = absolutePathToJavaFile.replace(this.templateDirectoryBasePathRegEx, '');
-
   var destinationPath = templateDirectoryRelativePath.replace('package', this._javaBasePackageSegments().join(path.sep));
   this.smartScaffold(templateDirectoryRelativePath, destinationPath);
 };
