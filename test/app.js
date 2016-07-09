@@ -57,4 +57,8 @@ describe('generator-signed:app', function () {
       projectDirectory('src/main/resources/static/index.html'), '<title>Example Project Rest API</title>'
     );
   });
+
+  it('should not copy template argument files (*.ejsArgs)', function () {
+    assert.noFile(projectDirectory('src/main/resources/static/index.html.ejsArgs'));
+  });
 });

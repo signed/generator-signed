@@ -28,7 +28,7 @@ ProjectStructure.prototype.scaffoldGlobIn = function (source, destination, optio
 };
 
 ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source, templateVariables) {
-  var files = globby.sync(this.generator.templatePath(source));
+  var files = globby.sync(this.generator.templatePath(source), {nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
     this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath, templateVariables);
@@ -58,9 +58,14 @@ ProjectStructure.prototype._javaBasePackageSegments = function () {
 };
 
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
+  this.generator.log(relativeDestinationPath);
+  if (this.endsWith(relativeTemplatePath, '.ejsArgs')) {
+    return;
+  }
+
   templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
   const suffix = '.java';
-  if (relativeTemplatePath.substr(-suffix.length) === suffix) {
+  if (this.endsWith(relativeTemplatePath, suffix)) {
     templateVariables.package = this._javaPackageSegementsFor(relativeTemplatePath).join('.');
   }
   this.generator.fs.copyTpl(
@@ -68,6 +73,10 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relat
     this._projectRoot(relativeDestinationPath),
     templateVariables
   );
+};
+
+ProjectStructure.prototype.endsWith = function (relativeTemplatePath, suffix) {
+  return relativeTemplatePath.substr(-suffix.length) === suffix;
 };
 
 ProjectStructure.prototype._projectRoot = function (path) {
