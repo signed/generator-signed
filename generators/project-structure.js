@@ -41,9 +41,13 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
 };
 
 ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
-  var templateDirectoryRelativePath = absolutePathToJavaFile.replace(this.templateDirectoryBasePathRegEx, '');
+  var templateDirectoryRelativePath = this._toTemplateDirectoryRelativePath(absolutePathToJavaFile);
   var destinationPath = templateDirectoryRelativePath.replace('package', this._javaBasePackageSegments().join(path.sep));
   this.smartScaffold(templateDirectoryRelativePath, destinationPath);
+};
+
+ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolutePathToTemplateFile) {
+  return absolutePathToTemplateFile.replace(this.templateDirectoryBasePathRegEx, '');
 };
 
 ProjectStructure.prototype._javaPackageSegementsFor = function (relativeTemplatePath) {
@@ -59,8 +63,8 @@ ProjectStructure.prototype._javaBasePackageSegments = function () {
 };
 
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
-  templateVariables = typeof templateVariables !== 'undefined' ? templateVariables : {};
-  const suffix = ".java";
+  templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
+  const suffix = '.java';
   if (relativeTemplatePath.substr(-suffix.length) === suffix) {
     templateVariables.package = this._javaPackageSegementsFor(relativeTemplatePath).join('.');
   }
