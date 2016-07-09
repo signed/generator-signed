@@ -60,10 +60,7 @@ module.exports = yeoman.Base.extend({
     },
 
     javaSourceFiles: function () {
-      var prefix = new RegExp('^' + this.templatePath() + '/');
-      var files = glob.sync(this.templatePath('**/*.java')).map(function (path) {
-        return path.replace(prefix, '');
-      });
+      var files = glob.sync(this.templatePath('**/*.java'));
       files.forEach(function (javaFileInTemplateDirectory) {
         this.projectStructure.scaffoldJavaFile(javaFileInTemplateDirectory);
       }, this);

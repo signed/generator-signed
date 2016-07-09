@@ -39,8 +39,11 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
   );
 };
 
-ProjectStructure.prototype.scaffoldJavaFile = function (javaFile) {
-  var segments = javaFile.split(path.sep);
+ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathTojavaFile) {
+  var prefix = new RegExp('^' + this.generator.templatePath() + '/');
+  var templateDirectoryRelativePath = absolutePathTojavaFile.replace(prefix, '');
+
+  var segments = templateDirectoryRelativePath.split(path.sep);
   var packageIndex = segments.indexOf('package');
 
   segments.pop();
@@ -49,11 +52,11 @@ ProjectStructure.prototype.scaffoldJavaFile = function (javaFile) {
   var basePackageSegments = this.generator.configuration.package().split('.');
   var packageSegments = basePackageSegments.concat(segments);
 
-  var destinationPath = javaFile.replace('package', basePackageSegments.join('/'));
+  var destinationPath = templateDirectoryRelativePath.replace('package', basePackageSegments.join('/'));
   var packageForFile = packageSegments.join('.');
 
   this.generator.fs.copyTpl(
-    this.generator.templatePath(javaFile),
+    this.generator.templatePath(templateDirectoryRelativePath),
     this._projectRoot(destinationPath), {
       package: packageForFile
     }
