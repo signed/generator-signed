@@ -24,12 +24,11 @@ ProjectStructure.prototype.scaffoldGlobIn = function (glob, destination, options
   );
 };
 
-ProjectStructure.prototype.scaffoldGlobWithTemplateIn = function (glob, destination, templateVariables, options) {
+ProjectStructure.prototype.scaffoldGlobWithTemplateIn = function (glob, destination, templateVariables) {
   this.generator.fs.copyTpl(
     this.generator.templatePath(glob),
     this._projectRoot(destination),
-    templateVariables,
-    options
+    templateVariables
   );
 };
 
