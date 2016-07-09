@@ -55,11 +55,18 @@ ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathTojavaFile) 
   var destinationPath = templateDirectoryRelativePath.replace('package', basePackageSegments.join('/'));
   var packageForFile = packageSegments.join('.');
 
-  this.generator.fs.copyTpl(
-    this.generator.templatePath(templateDirectoryRelativePath),
-    this._projectRoot(destinationPath), {
+  this.smartScaffold(templateDirectoryRelativePath, destinationPath,{
       package: packageForFile
     }
+  );
+};
+
+ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
+  //templateVariables = typeof templateVariables !== 'undefined' ? templateVariables : {};
+  this.generator.fs.copyTpl(
+    this.generator.templatePath(relativeTemplatePath),
+    this._projectRoot(relativeDestinationPath),
+    templateVariables
   );
 };
 
