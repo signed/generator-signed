@@ -58,13 +58,13 @@ ProjectStructure.prototype._javaBasePackageSegments = function () {
 
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
   this.generator.log(relativeDestinationPath);
-  if (this.endsWith(relativeTemplatePath, '.ejsArgs')) {
+  if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
   }
 
   templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
   const suffix = '.java';
-  if (this.endsWith(relativeTemplatePath, suffix)) {
+  if (this._endsWith(relativeTemplatePath, suffix)) {
     templateVariables.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
   this.generator.fs.copyTpl(
@@ -74,7 +74,7 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relat
   );
 };
 
-ProjectStructure.prototype.endsWith = function (relativeTemplatePath, suffix) {
+ProjectStructure.prototype._endsWith = function (relativeTemplatePath, suffix) {
   return relativeTemplatePath.substr(-suffix.length) === suffix;
 };
 
