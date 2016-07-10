@@ -26,11 +26,11 @@ ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
   }, this);
 };
 
-ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source, templateVariables) {
+ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source) {
   var files = globby.sync(this.generator.templatePath(source), {nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
-    this.smartScaffold(pathRelativeToTemplatePath, templateVariables);
+    this.smartScaffold(pathRelativeToTemplatePath);
   }, this);
 };
 

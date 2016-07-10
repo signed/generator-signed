@@ -55,9 +55,7 @@ module.exports = yeoman.Base.extend({
     },
 
     mavenResources: function () {
-      this.projectStructure.scaffoldGlobWithTemplate('src/main/resources/**', {
-        projectName: this.configuration.projectName()
-      });
+      this.projectStructure.scaffoldGlobWithTemplate('src/main/resources/**');
     },
 
     javaSourceFiles: function () {
