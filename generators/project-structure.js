@@ -12,18 +12,8 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   this.smartScaffold(path);
 };
 
-ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
-  const globOptions = options.globOptions || {};
-  var blub = this.generator.templatePath(source);
-  var files = globby.sync(blub, globOptions);
-  files.forEach(function (file) {
-    var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
-    this.smartScaffold(pathRelativeToTemplatePath);
-  }, this);
-};
-
 ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source) {
-  var files = globby.sync(this.generator.templatePath(source), {nodir: true});
+  var files = globby.sync(this.generator.templatePath(source), {dot:true, nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
     this.smartScaffold(pathRelativeToTemplatePath);

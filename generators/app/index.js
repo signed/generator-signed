@@ -31,13 +31,7 @@ module.exports = yeoman.Base.extend({
     },
 
     filesInProjectRoot: function () {
-      this.projectStructure.scaffoldGlobIn('*', {
-        globOptions: {
-          dot: true,
-          nodir: true,
-          ignore: ['**/pom.xml']
-        }
-      });
+      this.projectStructure.scaffoldGlobWithTemplate('*');
     }
   },
 
