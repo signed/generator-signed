@@ -41,7 +41,6 @@ ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) 
 };
 
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
-  this.generator.log(relativeDestinationPath);
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
   }
