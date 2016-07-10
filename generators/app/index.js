@@ -48,10 +48,7 @@ module.exports = yeoman.Base.extend({
     },
 
     maven: function () {
-      this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml', {
-        artifactId: this.configuration.artifactName(),
-        groupId: this.configuration.package()
-      });
+      this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml');
     },
 
     mavenResources: function () {

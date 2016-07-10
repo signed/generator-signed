@@ -17,8 +17,8 @@ function Configuration(generator) {
     artifactName: {
       prompt: {
         type: 'input',
-        name: 'projectName',
-        message: 'How should the artifact be named',
+        name: 'artifactName',
+        message: 'How should the maven artifact be named?',
         default: 'ping'
       }
     },

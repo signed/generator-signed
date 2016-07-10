@@ -12,8 +12,8 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   this.smartScaffold(path);
 };
 
-ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templateVariables) {
-  this.smartScaffold(path, templateVariables);
+ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path) {
+  this.smartScaffold(path);
 };
 
 ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
@@ -49,7 +49,8 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templ
   if (this.generator.fs.exists(templateArgumentsPath)) {
     var templateArguments = this.generator.fs.readJSON(templateArgumentsPath);
     Object.keys(templateArguments).forEach(function (property) {
-      resolvedTemplateArguments[property] = this.generator.configuration[property]();
+      var toResolve = templateArguments[property];
+      resolvedTemplateArguments[property] = this.generator.configuration[toResolve]();
     }, this);
   }
 
