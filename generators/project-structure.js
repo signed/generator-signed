@@ -2,6 +2,8 @@
 const path = require('path');
 const globby = require('globby');
 
+const TemplateArgumentFileExtension = '.ejsArgs';
+
 module.exports = ProjectStructure;
 
 function ProjectStructure(generator) {
@@ -13,7 +15,7 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
 };
 
 ProjectStructure.prototype.scaffoldGlobInProjectRoot = function (source) {
-  var files = globby.sync(this.generator.templatePath(source), {dot:true, nodir: true});
+  var files = globby.sync(this.generator.templatePath(source), {dot: true, nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
     this.smartScaffold(pathRelativeToTemplatePath);
@@ -21,12 +23,12 @@ ProjectStructure.prototype.scaffoldGlobInProjectRoot = function (source) {
 };
 
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath) {
-  if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
+  if (this._endsWith(relativeTemplatePath, TemplateArgumentFileExtension)) {
     return;
   }
 
   var resolvedTemplateArguments = {};
-  var templateArgumentsPath = this.generator.templatePath(relativeTemplatePath + '.ejsArgs');
+  var templateArgumentsPath = this.generator.templatePath(relativeTemplatePath + TemplateArgumentFileExtension);
   if (this.generator.fs.exists(templateArgumentsPath)) {
     var templateArguments = this.generator.fs.readJSON(templateArgumentsPath);
     Object.keys(templateArguments).forEach(function (property) {
