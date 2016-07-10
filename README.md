@@ -12,6 +12,14 @@ Then generate your new project:
 yo signed
 ```
 
+Docker installed?
+```bash
+#!/bin/bash
+docker pull signed/generator-signed:latest
+docker run -it --rm --name yo -v "$PWD":/usr/src/app -w /usr/src/app signed/generator-signed:latest "$@"
+```
+
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
