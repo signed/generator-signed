@@ -44,18 +44,26 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templ
     return;
   }
 
+  var resolvedTemplateArguments = typeof templateVariables === 'undefined' ? {} : templateVariables;
+  var templateArgumentsPath = this.generator.templatePath(relativeTemplatePath + '.ejsArgs');
+  if (this.generator.fs.exists(templateArgumentsPath)) {
+    var templateArguments = this.generator.fs.readJSON(templateArgumentsPath);
+    Object.keys(templateArguments).forEach(function (property) {
+      resolvedTemplateArguments[property] = this.generator.configuration[property]();
+    }, this);
+  }
+
   var relativeDestinationPath = relativeTemplatePath;
 
-  templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
   const suffix = '.java';
   if (this._endsWith(relativeTemplatePath, suffix)) {
-    relativeDestinationPath = relativeTemplatePath.replace('package', this._javaBasePackageSegments().join(path.sep))
-    templateVariables.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
+    relativeDestinationPath = relativeTemplatePath.replace('package', this._javaBasePackageSegments().join(path.sep));
+    resolvedTemplateArguments.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
   this.generator.fs.copyTpl(
     this.generator.templatePath(relativeTemplatePath),
     this._projectRoot(relativeDestinationPath),
-    templateVariables
+    resolvedTemplateArguments
   );
 };
 
