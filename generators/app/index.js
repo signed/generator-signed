@@ -31,7 +31,7 @@ module.exports = yeoman.Base.extend({
     },
 
     filesInProjectRoot: function () {
-      this.projectStructure.scaffoldGlobWithTemplate('*');
+      this.projectStructure.scaffoldGlobInProjectRoot('*');
     }
   },
 
@@ -46,7 +46,7 @@ module.exports = yeoman.Base.extend({
     },
 
     mavenResources: function () {
-      this.projectStructure.scaffoldGlobWithTemplate('src/main/resources/**');
+      this.projectStructure.scaffoldGlobInProjectRoot('src/main/resources/**');
     },
 
     javaSourceFiles: function () {

@@ -12,7 +12,7 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   this.smartScaffold(path);
 };
 
-ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source) {
+ProjectStructure.prototype.scaffoldGlobInProjectRoot = function (source) {
   var files = globby.sync(this.generator.templatePath(source), {dot:true, nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
