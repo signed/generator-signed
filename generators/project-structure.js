@@ -40,22 +40,6 @@ ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) 
   this.smartScaffold(templateDirectoryRelativePath, destinationPath);
 };
 
-ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolutePathToTemplateFile) {
-  return path.relative(this.generator.templatePath(), absolutePathToTemplateFile);
-};
-
-ProjectStructure.prototype._javaPackageSegmentsFor = function (relativeTemplatePath) {
-  var relativePathSegments = relativeTemplatePath.split(path.sep);
-  var packageIndex = relativePathSegments.indexOf('package');
-  relativePathSegments.pop();
-  relativePathSegments.splice(0, packageIndex + 1);
-  return this._javaBasePackageSegments().concat(relativePathSegments);
-};
-
-ProjectStructure.prototype._javaBasePackageSegments = function () {
-  return this.generator.configuration.package().split('.');
-};
-
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
   this.generator.log(relativeDestinationPath);
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
@@ -72,6 +56,22 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relat
     this._projectRoot(relativeDestinationPath),
     templateVariables
   );
+};
+
+ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolutePathToTemplateFile) {
+  return path.relative(this.generator.templatePath(), absolutePathToTemplateFile);
+};
+
+ProjectStructure.prototype._javaPackageSegmentsFor = function (relativeTemplatePath) {
+  var relativePathSegments = relativeTemplatePath.split(path.sep);
+  var packageIndex = relativePathSegments.indexOf('package');
+  relativePathSegments.pop();
+  relativePathSegments.splice(0, packageIndex + 1);
+  return this._javaBasePackageSegments().concat(relativePathSegments);
+};
+
+ProjectStructure.prototype._javaBasePackageSegments = function () {
+  return this.generator.configuration.package().split('.');
 };
 
 ProjectStructure.prototype._endsWith = function (relativeTemplatePath, suffix) {
