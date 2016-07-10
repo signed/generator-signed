@@ -41,15 +41,12 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templ
     relativeDestinationPath = relativeTemplatePath.replace('package', this._javaBasePackageSegments().join(path.sep));
     resolvedTemplateArguments.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
+
   this.generator.fs.copyTpl(
     this.generator.templatePath(relativeTemplatePath),
     this._projectRoot(relativeDestinationPath),
     resolvedTemplateArguments
   );
-};
-
-ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolutePathToTemplateFile) {
-  return path.relative(this.generator.templatePath(), absolutePathToTemplateFile);
 };
 
 ProjectStructure.prototype._javaPackageSegmentsFor = function (relativeTemplatePath) {
