@@ -20,11 +20,6 @@ ProjectStructure.prototype.scaffoldGlobInProjectRoot = function (source) {
   }, this);
 };
 
-ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
-  var templateDirectoryRelativePath = this._toTemplateDirectoryRelativePath(absolutePathToJavaFile);
-  this.smartScaffold(templateDirectoryRelativePath);
-};
-
 ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templateVariables) {
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
@@ -42,8 +37,7 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templ
 
   var relativeDestinationPath = relativeTemplatePath;
 
-  const suffix = '.java';
-  if (this._endsWith(relativeTemplatePath, suffix)) {
+  if (this._endsWith(relativeTemplatePath, '.java')) {
     relativeDestinationPath = relativeTemplatePath.replace('package', this._javaBasePackageSegments().join(path.sep));
     resolvedTemplateArguments.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
