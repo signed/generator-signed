@@ -44,7 +44,7 @@ ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolute
   return path.relative(this.generator.templatePath(), absolutePathToTemplateFile);
 };
 
-ProjectStructure.prototype._javaPackageSegementsFor = function (relativeTemplatePath) {
+ProjectStructure.prototype._javaPackageSegmentsFor = function (relativeTemplatePath) {
   var relativePathSegments = relativeTemplatePath.split(path.sep);
   var packageIndex = relativePathSegments.indexOf('package');
   relativePathSegments.pop();
@@ -65,7 +65,7 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relat
   templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
   const suffix = '.java';
   if (this.endsWith(relativeTemplatePath, suffix)) {
-    templateVariables.package = this._javaPackageSegementsFor(relativeTemplatePath).join('.');
+    templateVariables.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
   this.generator.fs.copyTpl(
     this.generator.templatePath(relativeTemplatePath),
