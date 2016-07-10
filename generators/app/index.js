@@ -48,7 +48,7 @@ module.exports = yeoman.Base.extend({
     },
 
     maven: function () {
-      this.projectStructure.scaffoldTemplateInProjectRoot('pom.xml');
+      this.projectStructure.scaffoldInProjectRoot('pom.xml');
     },
 
     mavenResources: function () {

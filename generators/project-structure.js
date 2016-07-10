@@ -12,10 +12,6 @@ ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
   this.smartScaffold(path);
 };
 
-ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path) {
-  this.smartScaffold(path);
-};
-
 ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
   const globOptions = options.globOptions || {};
   var blub = this.generator.templatePath(source);
