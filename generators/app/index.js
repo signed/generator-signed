@@ -2,7 +2,6 @@
 const yeoman = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const glob = require('glob');
 const ProjectStructure = require('../project-structure');
 const Configuration = require('../configuration');
 
