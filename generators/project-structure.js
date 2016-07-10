@@ -6,7 +6,6 @@ module.exports = ProjectStructure;
 
 function ProjectStructure(generator) {
   this.generator = generator;
-  this.templateDirectoryBasePathRegEx = new RegExp('^' + this.generator.templatePath() + '/');
 }
 
 ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
@@ -42,7 +41,7 @@ ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) 
 };
 
 ProjectStructure.prototype._toTemplateDirectoryRelativePath = function (absolutePathToTemplateFile) {
-  return absolutePathToTemplateFile.replace(this.templateDirectoryBasePathRegEx, '');
+  return path.relative(this.generator.templatePath(), absolutePathToTemplateFile);
 };
 
 ProjectStructure.prototype._javaPackageSegementsFor = function (relativeTemplatePath) {
