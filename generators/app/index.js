@@ -1,10 +1,10 @@
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
-var glob = require('glob');
-var ProjectStructure = require('../project-structure');
-var Configuration = require('../configuration');
+const yeoman = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
+const glob = require('glob');
+const ProjectStructure = require('../project-structure');
+const Configuration = require('../configuration');
 
 module.exports = yeoman.Base.extend({
 

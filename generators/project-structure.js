@@ -1,5 +1,5 @@
 'use strict';
-var path = require('path');
+const path = require('path');
 const globby = require('globby');
 
 module.exports = ProjectStructure;
@@ -43,6 +43,7 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templ
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
   }
+
   var relativeDestinationPath = relativeTemplatePath;
 
   templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
