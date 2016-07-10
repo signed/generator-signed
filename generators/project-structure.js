@@ -75,8 +75,8 @@ ProjectStructure.prototype._javaBasePackageSegments = function () {
   return this.generator.configuration.package().split('.');
 };
 
-ProjectStructure.prototype._endsWith = function (relativeTemplatePath, suffix) {
-  return relativeTemplatePath.substr(-suffix.length) === suffix;
+ProjectStructure.prototype._endsWith = function (string, suffix) {
+  return string.substr(-suffix.length) === suffix;
 };
 
 ProjectStructure.prototype._projectRoot = function (path) {
