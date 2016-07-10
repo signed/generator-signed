@@ -46,7 +46,7 @@ ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath) {
 
   this.generator.fs.copyTpl(
     this.generator.templatePath(relativeTemplatePath),
-    this._projectRoot(relativeDestinationPath),
+    this.generator.destinationPath(relativeDestinationPath),
     resolvedTemplateArguments
   );
 };
@@ -65,8 +65,4 @@ ProjectStructure.prototype._javaBasePackageSegments = function () {
 
 ProjectStructure.prototype._endsWith = function (string, suffix) {
   return string.substr(-suffix.length) === suffix;
-};
-
-ProjectStructure.prototype._projectRoot = function (path) {
-  return this.generator.destinationPath(path);
 };
