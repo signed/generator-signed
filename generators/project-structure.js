@@ -9,11 +9,11 @@ function ProjectStructure(generator) {
 }
 
 ProjectStructure.prototype.scaffoldInProjectRoot = function (path) {
-  this.smartScaffold(path, path);
+  this.smartScaffold(path);
 };
 
 ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templateVariables) {
-  this.smartScaffold(path, path, templateVariables);
+  this.smartScaffold(path, templateVariables);
 };
 
 ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
@@ -22,7 +22,7 @@ ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
   var files = globby.sync(blub, globOptions);
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
-    this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath);
+    this.smartScaffold(pathRelativeToTemplatePath);
   }, this);
 };
 
@@ -30,24 +30,25 @@ ProjectStructure.prototype.scaffoldGlobWithTemplate = function (source, template
   var files = globby.sync(this.generator.templatePath(source), {nodir: true});
   files.forEach(function (file) {
     var pathRelativeToTemplatePath = path.relative(this.generator.templatePath(), file);
-    this.smartScaffold(pathRelativeToTemplatePath, pathRelativeToTemplatePath, templateVariables);
+    this.smartScaffold(pathRelativeToTemplatePath, templateVariables);
   }, this);
 };
 
 ProjectStructure.prototype.scaffoldJavaFile = function (absolutePathToJavaFile) {
   var templateDirectoryRelativePath = this._toTemplateDirectoryRelativePath(absolutePathToJavaFile);
-  var destinationPath = templateDirectoryRelativePath.replace('package', this._javaBasePackageSegments().join(path.sep));
-  this.smartScaffold(templateDirectoryRelativePath, destinationPath);
+  this.smartScaffold(templateDirectoryRelativePath);
 };
 
-ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, relativeDestinationPath, templateVariables) {
+ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templateVariables) {
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
   }
+  var relativeDestinationPath = relativeTemplatePath;
 
   templateVariables = typeof templateVariables === 'undefined' ? {} : templateVariables;
   const suffix = '.java';
   if (this._endsWith(relativeTemplatePath, suffix)) {
+    relativeDestinationPath = relativeTemplatePath.replace('package', this._javaBasePackageSegments().join(path.sep))
     templateVariables.package = this._javaPackageSegmentsFor(relativeTemplatePath).join('.');
   }
   this.generator.fs.copyTpl(
