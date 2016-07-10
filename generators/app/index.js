@@ -31,7 +31,7 @@ module.exports = yeoman.Base.extend({
     },
 
     filesInProjectRoot: function () {
-      this.projectStructure.scaffoldGlobIn('*', '', {
+      this.projectStructure.scaffoldGlobIn('*', {
         globOptions: {
           dot: true,
           nodir: true,

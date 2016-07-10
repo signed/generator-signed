@@ -17,7 +17,7 @@ ProjectStructure.prototype.scaffoldTemplateInProjectRoot = function (path, templ
   this.smartScaffold(path, path, templateVariables);
 };
 
-ProjectStructure.prototype.scaffoldGlobIn = function (source, destination, options) {
+ProjectStructure.prototype.scaffoldGlobIn = function (source, options) {
   const globOptions = options.globOptions || {};
   var blub = this.generator.templatePath(source);
   var files = globby.sync(blub, globOptions);
