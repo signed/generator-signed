@@ -20,12 +20,12 @@ ProjectStructure.prototype.scaffoldGlobInProjectRoot = function (source) {
   }, this);
 };
 
-ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath, templateVariables) {
+ProjectStructure.prototype.smartScaffold = function (relativeTemplatePath) {
   if (this._endsWith(relativeTemplatePath, '.ejsArgs')) {
     return;
   }
 
-  var resolvedTemplateArguments = typeof templateVariables === 'undefined' ? {} : templateVariables;
+  var resolvedTemplateArguments = {};
   var templateArgumentsPath = this.generator.templatePath(relativeTemplatePath + '.ejsArgs');
   if (this.generator.fs.exists(templateArgumentsPath)) {
     var templateArguments = this.generator.fs.readJSON(templateArgumentsPath);
