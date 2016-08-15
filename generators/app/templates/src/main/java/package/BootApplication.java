@@ -1,16 +1,13 @@
 package <%-package%>;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@Configuration
-@EnableAutoConfiguration
+@SpringBootApplication
 public class BootApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder()
-                .sources(BootApplication.class)
-                .run(args);
+        SpringApplication.run(BootApplication.class, args);
     }
+
 }
