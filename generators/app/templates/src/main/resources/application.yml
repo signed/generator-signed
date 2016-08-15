@@ -3,3 +3,4 @@ server:
     accesslog:
       enabled: true
       pattern: '%h %l %u %t "%r" %s %b %D'
+    basedir: target/tomcat
