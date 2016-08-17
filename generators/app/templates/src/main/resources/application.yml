@@ -4,3 +4,6 @@ server:
       enabled: true
       pattern: '%h %l %u %t "%r" %s %b %D'
     basedir: target/tomcat
+logging:
+  pattern:
+    console: "%date{\"yyyy-MM-dd'T'HH:mm:ss,SSSZ\",UTC} [%thread] %-5level %logger{36} - %msg%n"
