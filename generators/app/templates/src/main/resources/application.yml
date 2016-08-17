@@ -6,4 +6,4 @@ server:
     basedir: target/tomcat
 logging:
   pattern:
-    console: "%date{\"yyyy-MM-dd'T'HH:mm:ss,SSSZ\",UTC} [%thread] %-5level %logger{36} - %msg%n"
+    console: "%date{\"yyyy-MM-dd'T'HH:mm:ss,SSSXXX\",UTC} [%thread] %-5level %logger{36} - %msg%n"
